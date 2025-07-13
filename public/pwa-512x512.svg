@@ -1,0 +1,54 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" fill="#3b82f6" rx="64"/>
+  
+  <!-- Sudoku Grid -->
+  <rect x="100" y="100" width="312" height="312" fill="#1e40af" rx="16"/>
+  
+  <!-- Grid Lines -->
+  <g stroke="#ffffff" stroke-width="4" fill="none">
+    <!-- Major horizontal lines -->
+    <line x1="108" y1="204" x2="404" y2="204"/>
+    <line x1="108" y1="308" x2="404" y2="308"/>
+    
+    <!-- Major vertical lines -->
+    <line x1="204" y1="108" x2="204" y2="404"/>
+    <line x1="308" y1="108" x2="308" y2="404"/>
+    
+    <!-- Minor horizontal lines -->
+    <line x1="108" y1="138" x2="404" y2="138"/>
+    <line x1="108" y1="171" x2="404" y2="171"/>
+    <line x1="108" y1="237" x2="404" y2="237"/>
+    <line x1="108" y1="275" x2="404" y2="275"/>
+    <line x1="108" y1="341" x2="404" y2="341"/>
+    <line x1="108" y1="374" x2="404" y2="374"/>
+    
+    <!-- Minor vertical lines -->
+    <line x1="138" y1="108" x2="138" y2="404"/>
+    <line x1="171" y1="108" x2="171" y2="404"/>
+    <line x1="237" y1="108" x2="237" y2="404"/>
+    <line x1="275" y1="108" x2="275" y2="404"/>
+    <line x1="341" y1="108" x2="341" y2="404"/>
+    <line x1="374" y1="108" x2="374" y2="404"/>
+  </g>
+  
+  <!-- Numbers -->
+  <text x="123" y="133" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">5</text>
+  <text x="221" y="133" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">8</text>
+  <text x="356" y="133" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">2</text>
+  <text x="156" y="166" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">3</text>
+  <text x="323" y="166" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">1</text>
+  <text x="189" y="199" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">7</text>
+  <text x="290" y="199" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">4</text>
+  <text x="123" y="232" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">9</text>
+  <text x="356" y="232" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">6</text>
+  <text x="189" y="270" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">2</text>
+  <text x="290" y="270" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">8</text>
+  <text x="156" y="303" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">5</text>
+  <text x="323" y="303" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">3</text>
+  <text x="123" y="336" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">4</text>
+  <text x="221" y="336" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">7</text>
+  <text x="356" y="336" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">9</text>
+  <text x="189" y="369" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">6</text>
+  <text x="290" y="369" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">1</text>
+</svg> 

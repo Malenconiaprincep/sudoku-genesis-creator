@@ -1,73 +1,144 @@
-# Welcome to your Lovable project
+# Sudoku Genesis Creator
 
-## Project info
+一个优雅的数独游戏创作工具，支持PWA功能，可以离线使用。
 
-**URL**: https://lovable.dev/projects/375584fa-561c-4401-a891-5a79f0967315
+## 🎯 项目特性
 
-## How can I edit this code?
+- 🎮 **数独游戏功能** - 完整的数独游戏体验
+- 📱 **PWA 支持** - 可安装到桌面，支持离线使用
+- 🎨 **现代设计** - 使用 shadcn-ui 和 Tailwind CSS
+- ⚡ **高性能** - 基于 Vite 构建，启动速度快
+- 🔧 **TypeScript** - 完整的类型安全
 
-There are several ways of editing your application.
+## 🚀 快速开始
 
-**Use Lovable**
+### 安装依赖
+```bash
+npm install
+```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/375584fa-561c-4401-a891-5a79f0967315) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 开发模式
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### 构建生产版本
+```bash
+npm run build
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 预览生产版本
+```bash
+npm run preview
+```
 
-**Use GitHub Codespaces**
+## 📱 PWA 功能
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+本项目支持完整的 PWA 功能：
 
-## What technologies are used for this project?
+### 主要特性
+- **离线访问** - 使用 Service Worker 缓存关键资源
+- **安装到桌面** - 支持各种设备和操作系统
+- **自动更新** - 应用会自动检查和更新到最新版本
+- **原生体验** - 提供原生应用般的启动体验
 
-This project is built with:
+### 如何安装到桌面
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+#### 桌面浏览器 (Chrome/Edge)
+1. 访问应用
+2. 点击地址栏右侧的"安装"按钮
+3. 或者点击浏览器菜单中的"安装 Sudoku Genesis Creator"
 
-## How can I deploy this project?
+#### 移动设备
+- **iOS**: 点击分享按钮，选择"添加到主屏幕"
+- **Android**: 浏览器会自动显示安装横幅，点击"安装"
 
-Simply open [Lovable](https://lovable.dev/projects/375584fa-561c-4401-a891-5a79f0967315) and click on Share -> Publish.
+详细的PWA使用指南请参考 [PWA_GUIDE.md](./PWA_GUIDE.md)
 
-## Can I connect a custom domain to my Lovable project?
+## 🛠️ 技术栈
 
-Yes, you can!
+- **构建工具**: Vite
+- **前端框架**: React 18
+- **语言**: TypeScript
+- **UI组件**: shadcn-ui
+- **样式**: Tailwind CSS
+- **PWA支持**: vite-plugin-pwa + Workbox
+- **路由**: React Router DOM
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📁 项目结构
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```
+src/
+├── components/          # React 组件
+│   ├── ui/             # shadcn-ui 组件
+│   └── SudokuGame.tsx  # 数独游戏组件
+├── hooks/              # 自定义 hooks
+├── lib/                # 工具函数
+├── pages/              # 页面组件
+└── main.tsx           # 入口文件
+
+public/
+├── pwa-192x192.svg    # PWA 图标 (192x192)
+├── pwa-512x512.svg    # PWA 图标 (512x512)
+├── apple-touch-icon.svg # Apple Touch 图标
+├── screenshot-desktop.svg # 桌面截图
+├── screenshot-mobile.svg  # 移动端截图
+└── favicon.ico        # 网站图标
+```
+
+## 🧪 测试 PWA 功能
+
+### 使用 Chrome DevTools
+1. 打开 Chrome DevTools (F12)
+2. 切换到 Application 面板
+3. 检查 Manifest 和 Service Worker 状态
+4. 使用 Lighthouse 进行 PWA 评估
+
+### 检查清单
+- ✅ Web App Manifest 配置正确
+- ✅ Service Worker 注册成功
+- ✅ HTTPS 或 localhost 环境
+- ✅ 离线功能正常工作
+- ✅ 安装提示正常显示
+
+## 🌐 浏览器兼容性
+
+- ✅ Chrome 67+
+- ✅ Firefox 62+
+- ✅ Safari 11.1+
+- ✅ Edge 79+
+- ✅ Samsung Internet 8.2+
+
+## 🚀 部署
+
+项目可以部署到任何支持静态文件的服务器：
+
+- Netlify
+- Vercel
+- GitHub Pages
+- Firebase Hosting
+- AWS S3 + CloudFront
+
+**注意**: 生产环境需要配置 HTTPS 才能使用完整的 PWA 功能。
+
+## 📝 开发说明
+
+### 代码风格
+- 使用 ESLint 进行代码检查
+- TypeScript 严格模式
+- 组件使用函数式写法
+- 样式使用 Tailwind CSS
+
+### 构建优化
+- 自动代码分割
+- 资源压缩
+- Tree shaking
+- PWA 预缓存
+
+## 🤝 贡献
+
+欢迎提交 Issues 和 Pull Requests！
+
+## 📄 许可证
+
+MIT License

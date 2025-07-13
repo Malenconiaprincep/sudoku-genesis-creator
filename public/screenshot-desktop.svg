@@ -1,0 +1,67 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1280" height="80" fill="#3b82f6"/>
+  <text x="640" y="45" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle">Sudoku Genesis Creator</text>
+  
+  <!-- Main Game Area -->
+  <rect x="340" y="120" width="600" height="500" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" rx="8"/>
+  
+  <!-- Sudoku Grid -->
+  <g stroke="#374151" stroke-width="1" fill="none">
+    <!-- Horizontal lines -->
+    <line x1="360" y1="340" x2="720" y2="340"/>
+    <line x1="360" y1="460" x2="720" y2="460"/>
+    
+    <!-- Vertical lines -->
+    <line x1="480" y1="140" x2="480" y2="600"/>
+    <line x1="600" y1="140" x2="600" y2="600"/>
+    
+    <!-- Minor grid lines -->
+    <g stroke="#9ca3af" stroke-width="0.5">
+      <line x1="360" y1="180" x2="720" y2="180"/>
+      <line x1="360" y1="220" x2="720" y2="220"/>
+      <line x1="360" y1="260" x2="720" y2="260"/>
+      <line x1="360" y1="300" x2="720" y2="300"/>
+      <line x1="360" y1="380" x2="720" y2="380"/>
+      <line x1="360" y1="420" x2="720" y2="420"/>
+      <line x1="360" y1="500" x2="720" y2="500"/>
+      <line x1="360" y1="540" x2="720" y2="540"/>
+      <line x1="360" y1="580" x2="720" y2="580"/>
+      
+      <line x1="400" y1="140" x2="400" y2="600"/>
+      <line x1="440" y1="140" x2="440" y2="600"/>
+      <line x1="520" y1="140" x2="520" y2="600"/>
+      <line x1="560" y1="140" x2="560" y2="600"/>
+      <line x1="640" y1="140" x2="640" y2="600"/>
+      <line x1="680" y1="140" x2="680" y2="600"/>
+    </g>
+  </g>
+  
+  <!-- Numbers in grid -->
+  <text x="380" y="165" fill="#1f2937" font-family="Arial, sans-serif" font-size="20" font-weight="bold">5</text>
+  <text x="460" y="165" fill="#1f2937" font-family="Arial, sans-serif" font-size="20" font-weight="bold">8</text>
+  <text x="620" y="165" fill="#3b82f6" font-family="Arial, sans-serif" font-size="20" font-weight="bold">2</text>
+  <text x="500" y="205" fill="#1f2937" font-family="Arial, sans-serif" font-size="20" font-weight="bold">3</text>
+  <text x="580" y="205" fill="#1f2937" font-family="Arial, sans-serif" font-size="20" font-weight="bold">1</text>
+  <text x="700" y="205" fill="#3b82f6" font-family="Arial, sans-serif" font-size="20" font-weight="bold">7</text>
+  <text x="380" y="245" fill="#1f2937" font-family="Arial, sans-serif" font-size="20" font-weight="bold">9</text>
+  <text x="660" y="245" fill="#1f2937" font-family="Arial, sans-serif" font-size="20" font-weight="bold">4</text>
+  <text x="700" y="245" fill="#1f2937" font-family="Arial, sans-serif" font-size="20" font-weight="bold">6</text>
+  
+  <!-- Sidebar -->
+  <rect x="80" y="120" width="200" height="500" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1" rx="8"/>
+  <text x="180" y="150" fill="#374151" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">工具栏</text>
+  
+  <!-- Buttons -->
+  <rect x="100" y="180" width="160" height="40" fill="#3b82f6" rx="4"/>
+  <text x="180" y="205" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">新游戏</text>
+  
+  <rect x="100" y="240" width="160" height="40" fill="#64748b" rx="4"/>
+  <text x="180" y="265" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">提示</text>
+  
+  <rect x="100" y="300" width="160" height="40" fill="#64748b" rx="4"/>
+  <text x="180" y="325" fill="#ffffff" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle">检查</text>
+</svg> 
