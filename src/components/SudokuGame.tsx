@@ -396,7 +396,8 @@ export const SudokuGame = () => {
 
   const getCellClassName = (cell: Cell, row: number, col: number) => {
     const isSelected = selectedCell?.row === row && selectedCell?.col === col;
-    const baseClasses = "w-12 h-12 border border-sudoku-grid flex items-center justify-center text-lg font-semibold cursor-pointer transition-all duration-150";
+    // 响应式单元格尺寸：移动端更小，桌面端更大
+    const baseClasses = "w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 border border-sudoku-grid flex items-center justify-center text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-all duration-150";
 
     let bgClass = "bg-sudoku-cell hover:bg-sudoku-cell-hover";
     if (cell.isGiven) {
@@ -430,17 +431,17 @@ export const SudokuGame = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <Card className="p-8 shadow-lg">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">Sudoku</h1>
-          <p className="text-muted-foreground">Fill the grid so each row, column, and 3×3 box contains digits 1-9</p>
+    <div className="min-h-screen bg-background flex items-center justify-center p-2 sm:p-4">
+      <Card className="p-4 sm:p-6 md:p-8 shadow-lg w-full max-w-2xl">
+        <div className="text-center mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">Sudoku</h1>
+          <p className="text-sm sm:text-base text-muted-foreground px-2">Fill the grid so each row, column, and 3×3 box contains digits 1-9</p>
         </div>
 
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8">
           {/* Sudoku Grid */}
-          <div className="inline-block border-2 border-sudoku-box-border rounded-lg p-2 bg-sudoku-grid">
-            <div className="grid grid-cols-9 gap-0">
+          <div className="inline-block border-2 border-sudoku-box-border rounded-lg p-1 sm:p-2 bg-sudoku-grid">
+            <div className="grid grid-cols-9 gap-0 sudoku-grid prevent-zoom">
               {grid.map((row, rowIndex) =>
                 row.map((cell, colIndex) => (
                   <div
@@ -456,13 +457,13 @@ export const SudokuGame = () => {
           </div>
 
           {/* Number Input */}
-          <div className="flex gap-2 flex-wrap justify-center">
+          <div className="flex gap-1 sm:gap-2 flex-wrap justify-center max-w-xs sm:max-w-sm">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(num => (
               <Button
                 key={num}
                 variant="outline"
                 size="sm"
-                className="w-10 h-10 p-0 font-semibold"
+                className="w-8 h-8 sm:w-10 sm:h-10 p-0 font-semibold text-sm sm:text-base touch-manipulation"
                 onClick={() => {
                   if (selectedCell) {
                     updateCell(selectedCell.row, selectedCell.col, num);
@@ -476,30 +477,30 @@ export const SudokuGame = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-4 flex-wrap justify-center">
-            <Button onClick={newGame} className="flex items-center gap-2">
-              <Play className="w-4 h-4" />
+          <div className="flex gap-2 sm:gap-4 flex-wrap justify-center">
+            <Button onClick={newGame} className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-3 sm:px-4 touch-manipulation">
+              <Play className="w-3 h-3 sm:w-4 sm:h-4" />
               新游戏
             </Button>
-            <Button onClick={getHint} variant="secondary" className="flex items-center gap-2">
-              <Lightbulb className="w-4 h-4" />
+            <Button onClick={getHint} variant="secondary" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-3 sm:px-4 touch-manipulation">
+              <Lightbulb className="w-3 h-3 sm:w-4 sm:h-4" />
               提示
             </Button>
-            <Button onClick={checkSolution} variant="secondary" className="flex items-center gap-2">
-              <Check className="w-4 h-4" />
+            <Button onClick={checkSolution} variant="secondary" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-3 sm:px-4 touch-manipulation">
+              <Check className="w-3 h-3 sm:w-4 sm:h-4" />
               检查答案
             </Button>
-            <Button variant="outline" onClick={resetPuzzle} className="flex items-center gap-2">
-              <RotateCcw className="w-4 h-4" />
+            <Button variant="outline" onClick={resetPuzzle} className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm px-3 sm:px-4 touch-manipulation">
+              <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4" />
               重置
             </Button>
           </div>
 
-          <div className="text-sm text-muted-foreground text-center max-w-md space-y-2">
+          <div className="text-xs sm:text-sm text-muted-foreground text-center max-w-md space-y-2 px-2">
             <p>
-              <strong>鼠标操作：</strong> 点击格子选中，然后点击数字按钮或使用键盘输入
+              <strong>触摸操作：</strong> 点击格子选中，然后点击数字按钮
             </p>
-            <p>
+            <p className="hidden sm:block">
               <strong>键盘操作：</strong> 方向键导航 • 1-9填入数字 • 0/删除键/退格键清除 • 回车检查答案
             </p>
             <p className="text-xs text-primary">
