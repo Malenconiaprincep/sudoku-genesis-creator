@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { RotateCcw, Check, Lightbulb } from 'lucide-react';
@@ -36,6 +36,33 @@ export const SudokuGame = () => {
   });
   
   const [selectedCell, setSelectedCell] = useState<{row: number, col: number} | null>(null);
+
+  // Navigation helper function
+  const moveSelection = useCallback((direction: 'up' | 'down' | 'left' | 'right') => {
+    if (!selectedCell) {
+      setSelectedCell({row: 0, col: 0});
+      return;
+    }
+    
+    let { row, col } = selectedCell;
+    
+    switch (direction) {
+      case 'up':
+        row = row > 0 ? row - 1 : 8;
+        break;
+      case 'down':
+        row = row < 8 ? row + 1 : 0;
+        break;
+      case 'left':
+        col = col > 0 ? col - 1 : 8;
+        break;
+      case 'right':
+        col = col < 8 ? col + 1 : 0;
+        break;
+    }
+    
+    setSelectedCell({row, col});
+  }, [selectedCell]);
 
   const checkConflicts = useCallback((newGrid: Cell[][]) => {
     const hasConflict = (row: number, col: number, num: number) => {
@@ -107,6 +134,57 @@ export const SudokuGame = () => {
       });
     }
   }, [grid, toast]);
+
+  // Keyboard event handler
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Prevent default behavior for handled keys
+      if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Delete', 'Backspace', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(event.key)) {
+        event.preventDefault();
+      }
+
+      // Number input (1-9)
+      if (event.key >= '1' && event.key <= '9' && selectedCell) {
+        const num = parseInt(event.key);
+        updateCell(selectedCell.row, selectedCell.col, num);
+        return;
+      }
+
+      // Clear cell (0, Delete, Backspace)
+      if ((event.key === '0' || event.key === 'Delete' || event.key === 'Backspace') && selectedCell) {
+        updateCell(selectedCell.row, selectedCell.col, 0);
+        return;
+      }
+
+      // Arrow key navigation
+      if (event.key === 'ArrowUp') {
+        moveSelection('up');
+        return;
+      }
+      if (event.key === 'ArrowDown') {
+        moveSelection('down');
+        return;
+      }
+      if (event.key === 'ArrowLeft') {
+        moveSelection('left');
+        return;
+      }
+      if (event.key === 'ArrowRight') {
+        moveSelection('right');
+        return;
+      }
+
+      // Enter to check solution
+      if (event.key === 'Enter') {
+        checkSolution();
+        return;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedCell, updateCell, moveSelection, checkSolution]);
+
 
   const resetPuzzle = useCallback(() => {
     setGrid(initialPuzzle.map(row => 
@@ -212,8 +290,13 @@ export const SudokuGame = () => {
             </Button>
           </div>
           
-          <div className="text-sm text-muted-foreground text-center max-w-md">
-            Click on a cell to select it, then click a number button to fill it. Use × to clear a cell.
+          <div className="text-sm text-muted-foreground text-center max-w-md space-y-2">
+            <p>
+              <strong>Mouse:</strong> Click on a cell to select it, then click a number button or use keyboard
+            </p>
+            <p>
+              <strong>Keyboard:</strong> Arrow keys to navigate • 1-9 to fill • 0/Delete/Backspace to clear • Enter to check solution
+            </p>
           </div>
         </div>
       </Card>
