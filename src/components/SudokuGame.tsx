@@ -4,18 +4,41 @@ import { Card } from '@/components/ui/card';
 import { RotateCcw, Check, Lightbulb } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-// Sample Sudoku puzzle (0 represents empty cells)
+// Easy Sudoku puzzle for students (more numbers filled in)
 const initialPuzzle = [
-  [5, 3, 0, 0, 7, 0, 0, 0, 0],
-  [6, 0, 0, 1, 9, 5, 0, 0, 0],
-  [0, 9, 8, 0, 0, 0, 0, 6, 0],
-  [8, 0, 0, 0, 6, 0, 0, 0, 3],
-  [4, 0, 0, 8, 0, 3, 0, 0, 1],
-  [7, 0, 0, 0, 2, 0, 0, 0, 6],
-  [0, 6, 0, 0, 0, 0, 2, 8, 0],
-  [0, 0, 0, 4, 1, 9, 0, 0, 5],
-  [0, 0, 0, 0, 8, 0, 0, 7, 9]
+  [5, 3, 4, 6, 7, 8, 9, 1, 2],
+  [6, 7, 2, 1, 9, 5, 3, 4, 8],
+  [1, 9, 8, 3, 4, 2, 5, 6, 7],
+  [8, 5, 9, 7, 6, 1, 4, 2, 3],
+  [4, 2, 6, 8, 5, 3, 7, 9, 1],
+  [7, 1, 3, 9, 2, 4, 8, 5, 6],
+  [9, 6, 1, 5, 3, 7, 2, 8, 4],
+  [2, 8, 7, 4, 1, 9, 6, 3, 5],
+  [3, 4, 5, 2, 8, 6, 1, 7, 9]
 ];
+
+// Make it easier by removing some numbers
+const createEasyPuzzle = () => {
+  const puzzle = initialPuzzle.map(row => [...row]);
+  // Remove numbers to create puzzle (keeping more numbers for easier difficulty)
+  const cellsToRemove = [
+    [0, 2], [0, 3], [0, 6], [0, 7],
+    [1, 1], [1, 6], [1, 7],
+    [2, 0], [2, 3], [2, 5],
+    [3, 1], [3, 3], [3, 5], [3, 7],
+    [4, 0], [4, 2], [4, 6], [4, 8],
+    [5, 1], [5, 3], [5, 5], [5, 7],
+    [6, 2], [6, 4], [6, 7],
+    [7, 1], [7, 2], [7, 6],
+    [8, 1], [8, 3], [8, 5], [8, 6]
+  ];
+  
+  cellsToRemove.forEach(([row, col]) => {
+    puzzle[row][col] = 0;
+  });
+  
+  return puzzle;
+};
 
 type Cell = {
   value: number;
@@ -26,7 +49,8 @@ type Cell = {
 export const SudokuGame = () => {
   const { toast } = useToast();
   const [grid, setGrid] = useState<Cell[][]>(() => {
-    return initialPuzzle.map(row => 
+    const easyPuzzle = createEasyPuzzle();
+    return easyPuzzle.map(row => 
       row.map(value => ({
         value,
         isGiven: value !== 0,
@@ -186,8 +210,79 @@ export const SudokuGame = () => {
   }, [selectedCell, updateCell, moveSelection, checkSolution]);
 
 
+  // Get possible numbers for a cell (hint system)
+  const getPossibleNumbers = useCallback((row: number, col: number) => {
+    if (grid[row][col].value !== 0) return [];
+    
+    const possible = [];
+    for (let num = 1; num <= 9; num++) {
+      let canPlace = true;
+      
+      // Check row
+      for (let c = 0; c < 9; c++) {
+        if (grid[row][c].value === num) {
+          canPlace = false;
+          break;
+        }
+      }
+      
+      // Check column
+      if (canPlace) {
+        for (let r = 0; r < 9; r++) {
+          if (grid[r][col].value === num) {
+            canPlace = false;
+            break;
+          }
+        }
+      }
+      
+      // Check 3x3 box
+      if (canPlace) {
+        const boxRow = Math.floor(row / 3) * 3;
+        const boxCol = Math.floor(col / 3) * 3;
+        for (let r = boxRow; r < boxRow + 3; r++) {
+          for (let c = boxCol; c < boxCol + 3; c++) {
+            if (grid[r][c].value === num) {
+              canPlace = false;
+              break;
+            }
+          }
+          if (!canPlace) break;
+        }
+      }
+      
+      if (canPlace) possible.push(num);
+    }
+    return possible;
+  }, [grid]);
+
+  const getHint = useCallback(() => {
+    if (!selectedCell || grid[selectedCell.row][selectedCell.col].isGiven) {
+      toast({
+        title: "Select an empty cell",
+        description: "Click on an empty cell to get a hint",
+      });
+      return;
+    }
+    
+    const possible = getPossibleNumbers(selectedCell.row, selectedCell.col);
+    if (possible.length === 0) {
+      toast({
+        title: "No valid numbers",
+        description: "This cell has conflicts that need to be resolved first",
+        variant: "destructive"
+      });
+    } else {
+      toast({
+        title: "Possible numbers",
+        description: `You can place: ${possible.join(', ')}`,
+      });
+    }
+  }, [selectedCell, grid, getPossibleNumbers, toast]);
+
   const resetPuzzle = useCallback(() => {
-    setGrid(initialPuzzle.map(row => 
+    const easyPuzzle = createEasyPuzzle();
+    setGrid(easyPuzzle.map(row => 
       row.map(value => ({
         value,
         isGiven: value !== 0,
@@ -279,7 +374,11 @@ export const SudokuGame = () => {
           </div>
           
           {/* Action Buttons */}
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-wrap justify-center">
+            <Button onClick={getHint} variant="secondary" className="flex items-center gap-2">
+              <Lightbulb className="w-4 h-4" />
+              Get Hint
+            </Button>
             <Button onClick={checkSolution} className="flex items-center gap-2">
               <Check className="w-4 h-4" />
               Check Solution
