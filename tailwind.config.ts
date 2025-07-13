@@ -52,6 +52,18 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				sudoku: {
+					grid: 'hsl(var(--sudoku-grid))',
+					'box-border': 'hsl(var(--sudoku-box-border))',
+					cell: 'hsl(var(--sudoku-cell))',
+					'cell-given': 'hsl(var(--sudoku-cell-given))',
+					'cell-user': 'hsl(var(--sudoku-cell-user))',
+					'cell-conflict': 'hsl(var(--sudoku-cell-conflict))',
+					'cell-hover': 'hsl(var(--sudoku-cell-hover))',
+					number: 'hsl(var(--sudoku-number))',
+					'number-given': 'hsl(var(--sudoku-number-given))',
+					'number-conflict': 'hsl(var(--sudoku-number-conflict))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
